@@ -1,1 +1,1 @@
-web: gunicorn harding:app
+web: gunicorn harding.wsgi
