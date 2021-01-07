@@ -1,0 +1,31 @@
+{% load static %} 
+
+<nav style="width: 100%;"class="navbar sticky-top navbar-light bg-light">
+    <div class="row">
+    <a class="navbar-brand" href="{% url 'home' %}"><h1>Harding Development</h1></a>
+    </div>
+    <div class="row">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="{% url 'stories' %}">Stories</a>
+        </li>
+        
+        
+  
+        
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="{% url 'volunteering' %}">Volunteering</a>
+        </li>
+        </div>
+  
+        
+      </ul>
+      
+    </div>
+    
+  </nav>
+

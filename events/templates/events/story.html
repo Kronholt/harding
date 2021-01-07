@@ -1,0 +1,44 @@
+{% extends "events/main.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="card mb-3">
+        <img class="card-img-top" src="{{post.content_image.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h2 class="card-title">{{post.content_name}}</h2>
+          {% for tag in post.tags.all %}
+            <strong>{{tag}}</strong>
+          {% endfor %}
+        
+          <p>{{post.full_story}}</p>
+          <p class="card-text"><small class="text-muted">{{post.content_date_start}} - {{post.content_date_end}}</small></p>
+          <div class="buttons">
+          <a class="btn btn-info" href="#comment-form">Comment</a>
+          
+          <a class="btn btn-info" href="{% url 'event' post.id %}">Favorite</a>
+          <a class="btn btn-info" href="{% url 'event' post.id %}">Share</a>
+          </div>
+        </div>
+      </div>
+</div>
+<h4 style="margin-left: 5px;">Comments</h4>
+{% for comment in post.comment_set.all %}
+<div class="row comments">
+    <strong>{{comment.author.user_name}}:</strong>
+    {{comment.message}}
+    
+</div>
+{% endfor %}
+
+<div class="row comments" id="comment-form">
+    <form method="POST">
+    
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" name="Post">
+    </form>
+</div>
+
+
+
+{% endblock %}

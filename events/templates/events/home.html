@@ -1,0 +1,53 @@
+
+{% extends "events/main.html" %}
+{% load static %}
+{% include "events/navbar.html" %}
+{% block content %}
+
+<h2>Home</h2>
+<div class="comments">
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rank: {{request.user.volunteer.user_rank}}</li>
+    <li class="list-group-item">Points: {{request.user.volunteer.user_points}}</li>
+    <li class="list-group-item">Coins: {{request.user.volunteer.user_coins}}</li>
+  </ul>
+</div>
+<hr>
+
+
+</div>
+<div style="margin-left:5px;"class="row mt-3">
+  <h3>Your Events</h3>
+  {% for post in request.user.post_set.all %}
+  <div class="row">
+    <div class="card mb-3">
+        <img class="card-img-top" src="{{post.content_image.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h2 class="card-title">{{post.content_name}}</h2>
+          {% for tag in post.tags.all %}
+            <strong>{{tag}}</strong>
+          {% endfor %}
+        
+          <p>{{post.content_social_description}}</p>
+          <p class="card-text"><small class="text-muted">{{post.content_date_start}} - {{post.content_date_end}}</small></p>
+          <a class="btn btn-primary" href="{% url 'event' post.id %}">Learn More</a>
+        </div>
+      </div>
+</div>
+  {% endfor %}
+</div>
+
+
+<div style="margin-left:5px;"class="row mt-3">
+  <h3>Favorited Events</h3>
+</div>
+
+
+
+
+
+  
+
+
+{% endblock %}
