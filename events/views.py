@@ -5,11 +5,14 @@ from .filters import PostFilter
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CommentForm, CreateUserForm
 from .models import *
+from .decorators import *
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import requests
 import json
 
 # Create your views here.
+@login_required(login_url='login')
 def index(request):
     response = requests.get('http://hardingdevelopment.nexisit.net/harding_api/api_event_search.php?page_num=0&per_page=20&buckets=Volunteering&timezone=25200&app_server_version=3.2&app_version=2&app_build=1&user_id=2&token=70aedda35dca9c192ef551c9f7b570e0&salt=309a9bea4d2695656e83f4fe7b340ee0&app=1&version=3.2').json()
 
@@ -100,3 +103,7 @@ def loginPage(request):
             messages.error(request, 'Username or password is incorrect')
     template = 'events/login.html'
     return render(request, template, context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
